@@ -15,9 +15,7 @@ public class RunClass {
     public RunClass() {
         initializeEmptyBoard();
         putKnight(0,0);
-        printBoard();
         moveKnight(1,2);
-        printBoard();
         makeHorizontalMoves(knightY);
         printBoard();
     }
