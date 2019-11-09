@@ -1,5 +1,7 @@
 package com.github.hardelele.it.knight;
 
+import java.util.ArrayList;
+
 public class RunClass {
 
     private final int boardSize = 8;
@@ -10,18 +12,14 @@ public class RunClass {
     private int moveX, moveY;
     private int knightX, knightY;
 
-    private int[][] board;
-
     public RunClass() {
-        initializeEmptyBoard();
-        putKnight(0,0);
-        moveKnight(1,2);
-        makeHorizontalMoves(knightY);
-        printBoard();
+        int[][] board = new int[boardSize][];
+        initializeBoardAsEmpty(board,boardSize);
+        putKnight(board,1,2);
+        printBoard(board);
     }
 
-    private void initializeEmptyBoard() {
-        board = new int[boardSize][];
+    public void initializeBoardAsEmpty(int[][] board, int boardSize) {
         for (int counterX = 0; counterX < boardSize; counterX++) {
             board[counterX] = new int[boardSize];
             for (int counterY = 0; counterY < boardSize; counterY++) {
@@ -30,48 +28,40 @@ public class RunClass {
         }
     }
 
-    private void putKnight(int x, int y) {
-        if(isPossibleToPut(x,y)){
+    public void putKnight(int[][] board, int x, int y) {
+        if(isPossibleToPut(board, x, y)){
             knightX = x;
             knightY = y;
             board[knightX][knightY] = knight;
         }
     }
 
-    private void printBoard() {
+    public void printBoard(int[][] board) {
         System.out.print("\n");
-        for (int counterX = 0; counterX < boardSize; counterX++) {
-            for (int counterY = 0; counterY < boardSize; counterY++) {
+        for (int counterY = 0; counterY < boardSize; counterY++) {
+            for (int counterX = 0; counterX < boardSize; counterX++) {
                 System.out.print(board[counterX][counterY] + " ");
             }
             System.out.print("\n");
         }
     }
 
-    private boolean isPossibleToPut(int x, int y) {
+    public boolean isPossibleToPut(int[][] board, int x, int y) {
         return (board[x][y] == 0) && (x >= 0) && (x < 8) && (y >= 0) && (y < 8);
     }
 
-    private boolean isPossibleToMove(int x, int y) {
+    public boolean isPossibleToMove(int[][] board, int x, int y) {
         int differenceX = Math.abs(knightX - x);
         int differenceY = Math.abs(knightY - y);
-            return isPossibleToPut(x, y) && ((differenceX + differenceY==3) && (differenceX == 1 || differenceY == 1));
+            return isPossibleToPut(board, x, y) && ((differenceX + differenceY==3) && (differenceX == 1 || differenceY == 1));
     }
 
-    private void moveKnight(int x, int y) {
-        if(isPossibleToMove(x, y)){
+    public void moveKnight(int[][] board, int x, int y) {
+        if(isPossibleToMove(board, x, y)){
             board[knightX][knightY] = usedSquare;
             knightX = x;
             knightY = y;
             board[knightX][knightY] = knight;
-        }
-    }
-
-    private void makeHorizontalMoves(int y) {
-        for (int counterX = 0; counterX < 8; counterX++) {
-            for (int counterY = y-1; counterY < y+2; counterY += 2) {
-                moveKnight(counterX, counterY);
-            }
         }
     }
 }
