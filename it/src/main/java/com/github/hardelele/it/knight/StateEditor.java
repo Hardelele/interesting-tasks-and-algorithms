@@ -2,21 +2,17 @@ package com.github.hardelele.it.knight;
 
 import java.util.ArrayList;
 
-public class RunClass {
+public class StateEditor {
 
     private final int boardSize = 8;
     private final int knight = 1;
     private final int emptySquare = 0;
-    private final int usedSquare = 4;
+    private final int usedSquare = 2;
 
-    private int moveX, moveY;
     private int knightX, knightY;
 
-    public RunClass() {
-        int[][] board = new int[boardSize][];
-        initializeBoardAsEmpty(board,boardSize);
-        putKnight(board,1,2);
-        printBoard(board);
+    public StateEditor() {
+
     }
 
     public void initializeBoardAsEmpty(int[][] board, int boardSize) {
@@ -47,21 +43,43 @@ public class RunClass {
     }
 
     public boolean isPossibleToPut(int[][] board, int x, int y) {
-        return (board[x][y] == 0) && (x >= 0) && (x < 8) && (y >= 0) && (y < 8);
+        if ((x >= 0) && (x < 8) && (y >= 0) && (y < 8)) {
+            return (board[x][y] == 0);
+        }
+        else {
+            return false;
+        }
     }
 
     public boolean isPossibleToMove(int[][] board, int x, int y) {
         int differenceX = Math.abs(knightX - x);
         int differenceY = Math.abs(knightY - y);
-            return isPossibleToPut(board, x, y) && ((differenceX + differenceY==3) && (differenceX == 1 || differenceY == 1));
+            return isPossibleToPut(board, x, y)
+                    && ((differenceX + differenceY==3) && (differenceX == 1 || differenceY == 1));
     }
 
     public void moveKnight(int[][] board, int x, int y) {
-        if(isPossibleToMove(board, x, y)){
+        if(isPossibleToMove(board, x, y)) {
             board[knightX][knightY] = usedSquare;
             knightX = x;
             knightY = y;
             board[knightX][knightY] = knight;
+        }
+    }
+
+    public void rightHorizontalRound(int[][] board, int x, int y) {
+        for (int counterX = x; counterX < 8; counterX++) {
+            for (int counterY = y-1; counterY <= y+1; counterY++) {
+                moveKnight(board,counterX,counterY);
+            }
+        }
+    }
+
+    public void leftHorizontalRound(int[][] board, int x, int y) {
+        for (int counterX = x; counterX >= 0; counterX--) {
+            for (int counterY = y-1; counterY <= y+1; counterY++) {
+                moveKnight(board,counterX,counterY);
+            }
         }
     }
 }
