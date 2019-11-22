@@ -32,7 +32,7 @@ public class StateEditor {
     }
 
     public void putKnight(int[][] board, int x, int y) {
-        if(isPossibleToPut(board, x, y)){
+        if(isOnBoard(board, x, y)){
             knightX = x;
             knightY = y;
             board[knightX][knightY] = knight;
@@ -47,9 +47,10 @@ public class StateEditor {
             }
             System.out.print("\n");
         }
+        System.out.print("\n");
     }
 
-    public boolean isPossibleToPut(int[][] board, int x, int y) {
+    public boolean isOnBoard(int[][] board, int x, int y) {
         if ((x >= 0) && (x < 8) && (y >= 0) && (y < 8)) {
             return (board[x][y] == 0);
         }
@@ -58,10 +59,16 @@ public class StateEditor {
         }
     }
 
+    public void outOfBoardException(int[][] board, int x, int y) {
+        if (!((x >= 0) && (x < 8) && (y >= 0) && (y < 8))) {
+            System.err.println("Error! Cant make put figure: out of board border on [x=" + x +"; y=" + y + "]");
+        }
+    }
+
     public boolean isPossibleToMove(int[][] board, int x, int y) {
         int differenceX = Math.abs(knightX - x);
         int differenceY = Math.abs(knightY - y);
-            return isPossibleToPut(board, x, y)
+            return isOnBoard(board, x, y)
                     && ((differenceX + differenceY==3) && (differenceX == 1 || differenceY == 1));
     }
 
@@ -72,6 +79,11 @@ public class StateEditor {
             knightY = y;
             board[knightX][knightY] = knight;
         }
+    }
+
+    public void moveKnightOrPrintException(int[][] board, int x, int y) {
+        moveKnight(board, x, y);
+        outOfBoardException(board, x, y);
     }
 
     public void rightHorizontalRound(int[][] board, int x, int y) {
@@ -105,6 +117,43 @@ public class StateEditor {
             }
         }
     }
+
+    public void topLeftMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x - 1, y - 2);
+    }
+
+    public void topRightMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x + 1, y - 2);
+    }
+
+    public void bottomLeftMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x - 1, y + 2);
+    }
+
+    public void bottomRightMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x + 1, y + 2);
+    }
+
+    public void leftTopMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x - 2, y - 1);
+    }
+
+    public void leftBottomMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x - 2, y + 1);
+    }
+
+    public void rightTopMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x + 2, y - 1);
+    }
+
+    public void rightBottomMove(int[][] board, int x, int y) {
+        moveKnightOrPrintException(board, x + 2, y + 1);
+    }
+
+
+    /*
+    Getters and Setters
+     */
 
     public int getKnightX() {
         return knightX;
