@@ -5,9 +5,16 @@ import java.util.ArrayList;
 public class StateEditor {
 
     private final int boardSize = 8;
+
+    /**
+     * Numbers that will be stored in board array.
+     * 0 - empty square that never used
+     * 1 - square that contains knight figure right now
+     * 2 - empty square that was used for storing knight figure
+     */
+    private final int usedSquare = 2;
     private final int knight = 1;
     private final int emptySquare = 0;
-    private final int usedSquare = 2;
 
     private int knightX, knightY;
 
@@ -97,5 +104,13 @@ public class StateEditor {
                 moveKnight(board,counterX,counterY);
             }
         }
+    }
+
+    public int getKnightX() {
+        return knightX;
+    }
+
+    public int getKnightY() {
+        return knightY;
     }
 }
