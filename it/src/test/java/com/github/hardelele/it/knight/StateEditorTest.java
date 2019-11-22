@@ -11,6 +11,30 @@ public class StateEditorTest {
     StateEditor stateEditor = new StateEditor();
 
     @Test
+    public void test() {
+        int x = 0;
+        int y = 0;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.bottomVerticalRound(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 1;
+        int assertionY = 6;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
     public void initializeEmptyBoardTest() {
         int boardSize = 8;
         int[][] board = new int[boardSize][];
@@ -171,9 +195,9 @@ public class StateEditorTest {
     }
 
     @Test
-    public void test() {
-        int x = 0;
-        int y = 0;
+    public void topLeftMoveTest() {
+        int x = 4;
+        int y = 4;
         int boardSize = 8;
         int[][] board = new int[boardSize][];
 
@@ -181,14 +205,182 @@ public class StateEditorTest {
         stateEditor.putKnight(board, x, y);
         stateEditor.printBoard(board);
 
-        stateEditor.bottomVerticalRound(board, x, y);
+        stateEditor.topLeftMove(board, x, y);
         stateEditor.printBoard(board);
 
         x = stateEditor.getKnightX();
         y = stateEditor.getKnightY();
 
-        int assertionX = 1;
+        int assertionX = 3;
+        int assertionY = 2;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void topRightMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.topRightMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 5;
+        int assertionY = 2;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void bottomLeftMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.bottomLeftMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 3;
         int assertionY = 6;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void bottomRightMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.bottomRightMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 5;
+        int assertionY = 6;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void leftTopMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.leftTopMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 2;
+        int assertionY = 3;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void leftBottomMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.leftBottomMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 2;
+        int assertionY = 5;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void rightTopMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.rightTopMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 6;
+        int assertionY = 3;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void rightBottomMoveTest() {
+        int x = 4;
+        int y = 4;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.rightBottomMove(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 6;
+        int assertionY = 5;
 
         assertEquals(assertionX, x);
         assertEquals(assertionY, y);
