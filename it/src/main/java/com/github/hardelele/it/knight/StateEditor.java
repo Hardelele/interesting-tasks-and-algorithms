@@ -82,4 +82,20 @@ public class StateEditor {
             }
         }
     }
+
+    public void bottomVerticalRound(int[][] board, int x, int y) {
+        for (int counterY = y; counterY < 8; counterY++) {
+            for (int counterX = x-1; counterX <= x+1; counterX++) {
+                moveKnight(board,counterX,counterY);
+            }
+        }
+    }
+
+    public void topVerticalRound(int[][] board, int x, int y) {
+        for (int counterY = y; counterY >= 0; counterY--) {
+            for (int counterX = x-1; counterX <= x+1; counterX++) {
+                moveKnight(board,counterX,counterY);
+            }
+        }
+    }
 }
