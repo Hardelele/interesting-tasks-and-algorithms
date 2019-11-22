@@ -59,9 +59,11 @@ public class StateEditor {
         }
     }
 
-    public void outOfBoardException(int[][] board, int x, int y) {
+    public void printException(int[][] board, int x, int y) {
         if (!((x >= 0) && (x < 8) && (y >= 0) && (y < 8))) {
-            System.err.println("Error! Cant make put figure: out of board border on [x=" + x +"; y=" + y + "]");
+            System.err.println("Error! Cant put figure: out of board border on [x=" + x +"; y=" + y + "]");
+        } else if(!(board[x][y] == 0)) {
+            System.err.println("Error! Cant put figure: there is already used square [x=" + x +"; y=" + y + "]");
         }
     }
 
@@ -83,7 +85,7 @@ public class StateEditor {
 
     public void moveKnightOrPrintException(int[][] board, int x, int y) {
         moveKnight(board, x, y);
-        outOfBoardException(board, x, y);
+        printException(board, x, y);
     }
 
     public void rightHorizontalRound(int[][] board, int x, int y) {
