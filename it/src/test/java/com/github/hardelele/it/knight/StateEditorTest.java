@@ -79,4 +79,34 @@ public class StateEditorTest {
         stateEditor.leftHorizontalRound(board,x,y);
         stateEditor.printBoard(board);
     }
+
+    @Test
+    public void bottomVerticalRoundTest() {
+        int x = 0;
+        int y = 0;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.bottomVerticalRound(board, x, y);
+        stateEditor.printBoard(board);
+    }
+
+    @Test
+    public void topVerticalRoundTest() {
+        int x = 0;
+        int y = 7;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.topVerticalRound(board, x, y);
+        stateEditor.printBoard(board);
+    }
 }
