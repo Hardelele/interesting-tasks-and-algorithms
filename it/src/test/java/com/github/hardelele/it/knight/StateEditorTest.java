@@ -2,6 +2,10 @@ package com.github.hardelele.it.knight;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.IntStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class StateEditorTest {
 
     StateEditor stateEditor = new StateEditor();
@@ -24,6 +28,14 @@ public class StateEditorTest {
 
         stateEditor.initializeBoardAsEmpty(board,boardSize);
         stateEditor.putKnight(board, knightX, knightY);
+
+        int assertion = 1;
+        int actual = 0;
+        for (int i = 0; i < 8; i++) {
+            actual += IntStream.of(board[i]).sum();
+        }
+
+        assertEquals(assertion, actual);
     }
 
     @Test
@@ -43,11 +55,23 @@ public class StateEditorTest {
         stateEditor.moveKnight(board, x, y);
         stateEditor.printBoard(board);
 
+        int assertionX = 2;
+        int assertionY = 1;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+
         x+=1;
         y+=2;
 
         stateEditor.moveKnight(board, x, y);
         stateEditor.printBoard(board);
+
+        assertionX = 3;
+        assertionY = 3;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
     }
 
     @Test
@@ -63,6 +87,15 @@ public class StateEditorTest {
 
         stateEditor.rightHorizontalRound(board,x,y);
         stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 6;
+        int assertionY = 1;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
     }
 
     @Test
@@ -78,6 +111,15 @@ public class StateEditorTest {
 
         stateEditor.leftHorizontalRound(board,x,y);
         stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 1;
+        int assertionY = 1;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
     }
 
     @Test
@@ -93,6 +135,15 @@ public class StateEditorTest {
 
         stateEditor.bottomVerticalRound(board, x, y);
         stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 1;
+        int assertionY = 6;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
     }
 
     @Test
@@ -108,5 +159,38 @@ public class StateEditorTest {
 
         stateEditor.topVerticalRound(board, x, y);
         stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 1;
+        int assertionY = 1;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
+    }
+
+    @Test
+    public void test() {
+        int x = 0;
+        int y = 0;
+        int boardSize = 8;
+        int[][] board = new int[boardSize][];
+
+        stateEditor.initializeBoardAsEmpty(board,boardSize);
+        stateEditor.putKnight(board, x, y);
+        stateEditor.printBoard(board);
+
+        stateEditor.bottomVerticalRound(board, x, y);
+        stateEditor.printBoard(board);
+
+        x = stateEditor.getKnightX();
+        y = stateEditor.getKnightY();
+
+        int assertionX = 1;
+        int assertionY = 6;
+
+        assertEquals(assertionX, x);
+        assertEquals(assertionY, y);
     }
 }
